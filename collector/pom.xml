@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>sample.multimodule</groupId>
-        <artifactId>sample.multimodule</artifactId>
+        <groupId>com.tracemeifyoucan</groupId>
+        <artifactId>tracemeifyoucan-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>sample.multimodule.service.impl</artifactId>
+    <artifactId>collector</artifactId>
     <packaging>jar</packaging>
     <name>Project Module - Service Implementation</name>
     <description>Module that contains services implementation defined on Service API module. Depends of Repository Module and 
@@ -14,17 +14,6 @@
 
     <dependencies>
 
-      <!-- Project Modules -->
-      <dependency>
-        <groupId>sample.multimodule</groupId>
-        <artifactId>sample.multimodule.repository</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>sample.multimodule</groupId>
-        <artifactId>sample.multimodule.service.api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
 
     </dependencies>
 

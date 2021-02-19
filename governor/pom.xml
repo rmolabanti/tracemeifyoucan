@@ -6,7 +6,7 @@
         <artifactId>tracemeifyoucan-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>sample.multimodule.model</artifactId>
+    <artifactId>governor</artifactId>
     <packaging>jar</packaging>
     <name>Project Module - Model</name>
     <description>Module that contains all Entities and Visual Objects to be used in the project. It doesn't have any dependencies. 

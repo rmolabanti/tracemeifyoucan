@@ -8,8 +8,8 @@
         <artifactId>platform-bom</artifactId>
         <version>2.0.1.RELEASE</version>
     </parent>
-    <groupId>sample.multimodule</groupId>
-    <artifactId>sample.multimodule</artifactId>
+    <groupId>com.tracemeifyoucan</groupId>
+    <artifactId>tracemeifyoucan-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Parent - Pom Aggregator</name>
@@ -22,10 +22,9 @@
     </properties>
 
     <modules>
-      <module>model</module>
-      <module>repository</module>
-      <module>service-api</module>
-      <module>service-impl</module>
+      <module>governor</module>
+      <module>publisher</module>
+      <module>collector</module>
       <module>application</module>
     </modules>
 
