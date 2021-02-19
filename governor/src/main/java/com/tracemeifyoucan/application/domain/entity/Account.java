@@ -1,4 +1,4 @@
-package sample.multimodule.domain.entity;
+package com.tracemeifyoucan.application.domain.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

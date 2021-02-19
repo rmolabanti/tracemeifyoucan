@@ -4,9 +4,10 @@
     <!-- Spring IO Platform is the parent of the generated application to
     be able to use Spring Boot and all its default configuration -->
     <parent>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>2.0.1.RELEASE</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tracemeifyoucan</groupId>
     <artifactId>tracemeifyoucan-parent</artifactId>
@@ -25,7 +26,7 @@
       <module>governor</module>
       <module>publisher</module>
       <module>collector</module>
-      <module>application</module>
+<!--      <module>application</module>-->
     </modules>
 
     <dependencies>
@@ -34,7 +35,11 @@
       <dependency>
 			  <groupId>org.springframework.boot</groupId>
 			  <artifactId>spring-boot-starter</artifactId>
-		  </dependency>
+      </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
