@@ -8,7 +8,7 @@
     </parent>
     <artifactId>publisher</artifactId>
     <packaging>jar</packaging>
-    <name>Project Module - Service API</name>
+    <name>Project Module - publisher</name>
     <description>Module that contains API of all project services. Depends of Model Module.</description>
 
     <dependencies>
