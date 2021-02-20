@@ -21,31 +21,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <dependencies>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-    </dependencies>
-    <parent>
-        <groupId>com.tracemeifyoucan</groupId>
-        <artifactId>tracemeifyoucan-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
-    <artifactId>governor</artifactId>
-    <packaging>jar</packaging>
-    <name>Project Module - Model</name>
-    <description>Module that contains all Entities and Visual Objects to be used in the project. It doesn't have any dependencies. 
-    </description>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+	<dependency>
+		<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+		<version>2.9.3</version>
+	</dependency>
 	</dependencies>
 
 	<build>
@@ -56,5 +36,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
