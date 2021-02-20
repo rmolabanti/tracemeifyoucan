@@ -12,6 +12,7 @@ import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,34 +25,37 @@ import java.io.IOException;
 public class PublishController {
     public static final Logger logger = LoggerFactory.getLogger(PublishController.class);
 
+    @Autowired
+    private PublisherService service;
+
     @PostMapping("/publish")
     public Entity publish(@RequestBody Entity entity) throws JsonProcessingException {
+            return TracerUtil.withSpan("publish",() ->{
+                logger.info(new ObjectMapper().writeValueAsString(entity));
+                try {
+                    logger.warn("Waiting 1000");
+                    Thread.sleep(1000);
+                    RestTemplate restTemplate = new RestTemplate();
+                    Integer count = restTemplate.getForObject("http://localhost:8083/reserve",Integer.class);
+                    logger.info("Reserved 1");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return entity;
+            });
 
-        try {
-            TraceConfiguration configuration = TraceConfiguration.builder()
-                //.setCredentials(new GoogleCredentials(new AccessToken(accessToken, expirationTime)))
-                .setProjectId("rep-sandbox").build();
-            //TraceExporter traceExporter = TraceExporter.createWithConfiguration(configuration);
-            
-            TraceExporter traceExporter = TraceExporter.createWithDefaultConfiguration();
-            OpenTelemetrySdk.getGlobalTracerManagement().addSpanProcessor(SimpleSpanProcessor.builder(traceExporter).build());
-            TracerProvider tracerProvider = OpenTelemetry.getGlobalTracerProvider();
-            Tracer tracer = tracerProvider.get("publisher");
-            Span publishSpan = tracer.spanBuilder("publish").startSpan();
-            logger.info(new ObjectMapper().writeValueAsString(entity));
-            try {
-                logger.warn("Waiting 1000");
-                Thread.sleep(1000);
-                RestTemplate restTemplate = new RestTemplate();
-                Integer count = restTemplate.getForObject("http://localhost:8083/reserve",Integer.class);
-                logger.info("Reserved 1");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            publishSpan.end();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return entity;
+    }
+
+
+    @PostMapping("/publish/annotation")
+    public Entity publish2(@RequestBody Entity entity) throws JsonProcessingException {
+        return TracerUtil.withSpan("publishWithAnnotation",() ->{
+            return service.publish(entity);
+        });
+    }
+
+    @PostMapping("/publish/attribute")
+    public Entity publish3(@RequestBody Entity entity) throws JsonProcessingException {
+            return service.publishWithAttribute(entity);
     }
 }
