@@ -19,8 +19,8 @@ public class TracerUtil {
     public static Tracer getTracer() {
         TraceExporter traceExporter = null;
         try {
-            //traceExporter = TraceExporter.createWithDefaultConfiguration();
-            //OpenTelemetrySdk.getGlobalTracerManagement().addSpanProcessor(SimpleSpanProcessor.builder(traceExporter).build());
+            traceExporter = TraceExporter.createWithDefaultConfiguration();
+            OpenTelemetrySdk.getGlobalTracerManagement().addSpanProcessor(SimpleSpanProcessor.builder(traceExporter).build());
             TracerProvider tracerProvider = OpenTelemetry.getGlobalTracerProvider();
             return tracerProvider.get("publisher");
         } catch (Exception e) {
