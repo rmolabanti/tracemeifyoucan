@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
 import java.io.IOException;
 
 @RestController
@@ -24,25 +25,25 @@ public class PublishController {
     public static final Logger logger = LoggerFactory.getLogger(PublishController.class);
 
     @PostMapping("/publish")
-    public String publish(@RequestBody PublishRequest publishRequest) throws JsonProcessingException {
+    public Entity publish(@RequestBody Entity entity) throws JsonProcessingException {
 
         try {
             TraceConfiguration configuration = TraceConfiguration.builder()
                 //.setCredentials(new GoogleCredentials(new AccessToken(accessToken, expirationTime)))
                 .setProjectId("rep-sandbox").build();
-
             //TraceExporter traceExporter = TraceExporter.createWithConfiguration(configuration);
+            
             TraceExporter traceExporter = TraceExporter.createWithDefaultConfiguration();
             OpenTelemetrySdk.getGlobalTracerManagement().addSpanProcessor(SimpleSpanProcessor.builder(traceExporter).build());
             TracerProvider tracerProvider = OpenTelemetry.getGlobalTracerProvider();
             Tracer tracer = tracerProvider.get("publisher");
             Span publishSpan = tracer.spanBuilder("publish").startSpan();
-            logger.info(new ObjectMapper().writeValueAsString(publishRequest));
+            logger.info(new ObjectMapper().writeValueAsString(entity));
             try {
-                logger.warn("waiting 1000");
+                logger.warn("Waiting 1000");
                 Thread.sleep(1000);
                 RestTemplate restTemplate = new RestTemplate();
-                Integer count = restTemplate.getForObject("http://localhost:8081/reserve",Integer.class);
+                Integer count = restTemplate.getForObject("http://localhost:8083/reserve",Integer.class);
                 logger.info("Reserved 1");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -51,6 +52,6 @@ public class PublishController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Published "+publishRequest.getId();
+        return entity;
     }
 }

@@ -26,7 +26,7 @@
       <module>governor</module>
       <module>publisher</module>
       <module>collector</module>
-<!--      <module>application</module>-->
+      <module>application</module>
     </modules>
 
     <dependencies>
