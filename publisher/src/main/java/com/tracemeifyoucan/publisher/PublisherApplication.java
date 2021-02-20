@@ -10,4 +10,6 @@ public class PublisherApplication {
 		SpringApplication.run(PublisherApplication.class, args);
 	}
 
+	
+
 }
