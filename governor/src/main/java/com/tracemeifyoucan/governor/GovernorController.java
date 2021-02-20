@@ -1,4 +1,4 @@
-package com.tracemeifyoucan.application.domain.entity;
+package com.tracemeifyoucan.governor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,6 @@ public class GovernorController {
 
 
     @RequestMapping(value = "/reserve", method = RequestMethod.GET)
-    @ResponseBody()
     public int reserve() throws InterruptedException {
         Thread.sleep(1000);
         return 1;
