@@ -2,6 +2,7 @@ package com.tracemeifyoucan.publisher;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.cloud.opentelemetry.trace.TraceConfiguration;
 import com.google.cloud.opentelemetry.trace.TraceExporter;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.trace.Span;
@@ -22,6 +23,11 @@ public class PublishController {
     public String publish(@RequestBody PublishRequest publishRequest) throws JsonProcessingException {
 
         try {
+            TraceConfiguration configuration = TraceConfiguration.builder()
+                //.setCredentials(new GoogleCredentials(new AccessToken(accessToken, expirationTime)))
+                .setProjectId("rep-sandbox").build();
+
+            //TraceExporter traceExporter = TraceExporter.createWithConfiguration(configuration);
             TraceExporter traceExporter = TraceExporter.createWithDefaultConfiguration();
             OpenTelemetrySdk.getGlobalTracerManagement().addSpanProcessor(SimpleSpanProcessor.builder(traceExporter).build());
             TracerProvider tracerProvider = OpenTelemetry.getGlobalTracerProvider();
