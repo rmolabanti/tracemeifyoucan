@@ -31,7 +31,7 @@ public class GovernorController {
         return 1;
     }
 
-    @Scheduled(fixedDelay = 1000)
+    //@Scheduled(fixedDelay = 1000)
     public  void redispush() throws InterruptedException {
         Jedis jedis = new Jedis("localhost");
         List<String> messages = jedis.blpop(0,"Q1");

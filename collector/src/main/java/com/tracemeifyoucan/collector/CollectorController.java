@@ -20,18 +20,26 @@ public class CollectorController {
     public Entity collect(){
         Entity entity = new Entity();
         entity.setName("name");
-        service.callGoApi();
         return entity;
     }
 
-    @Scheduled(fixedDelay = 1000)
+    @GetMapping("/callgoapi")
+    public String callgoApi(){
+        return service.callGoApi();
+    }
+
+    @GetMapping("/redis")
+    public void redis(){
+    }
+
+    //@Scheduled(fixedDelay = 1000)
     public void redispush(){
         Jedis jedis = new Jedis("localhost");
         jedis.lpush("Q1","TEST");
     }
 
 
-    @Scheduled(fixedDelay = 1000)
+    //@Scheduled(fixedDelay = 1000)
     public  void redispop(){
         Jedis jedis = new Jedis("localhost");
         List<String> messages = jedis.blpop(0,"Q2");
