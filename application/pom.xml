@@ -34,12 +34,10 @@
 		<dependency>
 			<groupId>io.opentelemetry.instrumentation</groupId>
 			<artifactId>opentelemetry-otlp-exporter-starter</artifactId>
-			<version>0.15.0</version>
 		</dependency>
 		<dependency>
 		<groupId>io.opentelemetry.instrumentation</groupId>
 		<artifactId>opentelemetry-aws-sdk-2.2</artifactId>
-		<version>0.15.0</version>
 		</dependency>
 	</dependencies>
 
