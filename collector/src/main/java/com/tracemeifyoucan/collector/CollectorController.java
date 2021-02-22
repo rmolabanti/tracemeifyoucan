@@ -44,8 +44,8 @@ public class CollectorController {
 
     @GetMapping("/redis")
     public void redis(){
-        threadPoolTaskScheduler.schedule(() -> redispush(), new org.springframework.scheduling.support.PeriodicTrigger(1, TimeUnit.SECONDS));
-        threadPoolTaskScheduler.schedule(() -> redispop(), new org.springframework.scheduling.support.PeriodicTrigger(1, TimeUnit.SECONDS));
+        threadPoolTaskScheduler.schedule(() -> redispush(), new org.springframework.scheduling.support.PeriodicTrigger(5, TimeUnit.SECONDS));
+        threadPoolTaskScheduler.schedule(() -> redispop(), new org.springframework.scheduling.support.PeriodicTrigger(5, TimeUnit.SECONDS));
     }
 
     //@Scheduled(fixedDelay = 1000)
