@@ -30,6 +30,7 @@
 		<dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-sdk</artifactId>
+			<version>0.14.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.opentelemetry.instrumentation</groupId>
@@ -38,6 +39,8 @@
 		<dependency>
 		<groupId>io.opentelemetry.instrumentation</groupId>
 		<artifactId>opentelemetry-aws-sdk-2.2</artifactId>
+			<version>0.13.0</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
