@@ -42,14 +42,15 @@ public class CollectorController {
         return service.callGoApi(time);
     }
 
-    @GetMapping("/redis")
+    //@GetMapping("/redis")
     public void redis(){
         threadPoolTaskScheduler.schedule(() -> redispush(), new org.springframework.scheduling.support.PeriodicTrigger(5, TimeUnit.SECONDS));
         threadPoolTaskScheduler.schedule(() -> redispop(), new org.springframework.scheduling.support.PeriodicTrigger(5, TimeUnit.SECONDS));
     }
 
-    //@Scheduled(fixedDelay = 1000)
     int count = 0;
+    
+    @Scheduled(fixedDelay = 5000)
     public void redispush(){
         String msg = "msg"+count++;
         System.out.println("pushing to Q1 message: "+msg);
@@ -57,7 +58,7 @@ public class CollectorController {
     }
 
 
-    //@Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 5000)
     public  void redispop(){
         List<String> messages = jedis.blpop(0,"Q2");
         System.out.println("pop form Q2 message: "+messages.get(1));
