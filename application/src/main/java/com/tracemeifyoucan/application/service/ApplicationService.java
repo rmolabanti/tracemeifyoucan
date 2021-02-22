@@ -17,7 +17,7 @@ public class ApplicationService {
         RestTemplate restTemplate = new RestTemplate();
         Entity entity = restTemplate.getForObject("http://localhost:8081/collect",Entity.class);
         entity.setId(123);
-        Entity rEntity = restTemplate.postForObject("http://localhost:8082/publish",entity,Entity.class);
-        logger.info("Response {}",mapper.writeValueAsString(rEntity));
+       // Entity rEntity = restTemplate.postForObject("http://localhost:8082/publish",entity,Entity.class);
+       // logger.info("Response {}",mapper.writeValueAsString(rEntity));
     }
 }
