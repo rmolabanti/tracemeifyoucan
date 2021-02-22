@@ -1,5 +1,6 @@
 package com.tracemeifyoucan.collector;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,14 @@ import java.util.List;
 @EnableScheduling
 public class CollectorController {
 
+    @Autowired
+    CollectorService service;
+
     @GetMapping("/collect")
     public Entity collect(){
         Entity entity = new Entity();
         entity.setName("name");
+        service.callGoApi();
         return entity;
     }
 
