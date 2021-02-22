@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
@@ -42,25 +43,16 @@ public class CollectorController {
         return service.callGoApi(time);
     }
 
-    //@GetMapping("/redis")
-    public void redis(){
-        threadPoolTaskScheduler.schedule(() -> redispush(), new org.springframework.scheduling.support.PeriodicTrigger(5, TimeUnit.SECONDS));
-        threadPoolTaskScheduler.schedule(() -> redispop(), new org.springframework.scheduling.support.PeriodicTrigger(5, TimeUnit.SECONDS));
-    }
-
-    int count = 0;
-
-    //@Scheduled(fixedDelay = 5000)
-    public void redispush(){
-        String msg = "msg"+count++;
-        System.out.println("pushing to Q1 message: "+msg);
-        jedis.lpush("Q1",msg);
+    @PostMapping("/redis/{message}")
+    public void redisPush(@PathVariable String message){
+        System.out.println("Pushing to Q1 message: "+message);
+        jedis.lpush("Q1",message);
     }
 
 
-    //@Scheduled(fixedDelay = 5000)
-    public  void redispop(){
-        List<String> messages = jedis.blpop(0,"Q2");
+    @GetMapping("/redis")
+    public  void redisPop(){
+        List<String> messages = jedis.blpop(0,"Q1");
         System.out.println("pop form Q2 message: "+messages.get(1));
     }
 
