@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
@@ -23,9 +24,9 @@ public class CollectorController {
         return entity;
     }
 
-    @GetMapping("/callgoapi")
-    public String callgoApi(){
-        return service.callGoApi();
+    @GetMapping("/callgoapi/{time}")
+    public String callgoApi(@PathVariable int time){
+        return service.callGoApi(time);
     }
 
     @GetMapping("/redis")
