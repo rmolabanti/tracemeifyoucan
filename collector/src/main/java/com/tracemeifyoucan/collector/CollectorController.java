@@ -49,8 +49,8 @@ public class CollectorController {
     }
 
     int count = 0;
-    
-    @Scheduled(fixedDelay = 5000)
+
+    //@Scheduled(fixedDelay = 5000)
     public void redispush(){
         String msg = "msg"+count++;
         System.out.println("pushing to Q1 message: "+msg);
@@ -58,7 +58,7 @@ public class CollectorController {
     }
 
 
-    @Scheduled(fixedDelay = 5000)
+    //@Scheduled(fixedDelay = 5000)
     public  void redispop(){
         List<String> messages = jedis.blpop(0,"Q2");
         System.out.println("pop form Q2 message: "+messages.get(1));

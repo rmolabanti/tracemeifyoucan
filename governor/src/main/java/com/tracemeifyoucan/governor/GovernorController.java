@@ -45,7 +45,7 @@ public class GovernorController {
         threadPoolTaskScheduler.schedule(() -> redispush(), new org.springframework.scheduling.support.PeriodicTrigger(5, TimeUnit.SECONDS));
     }
 
-    @Scheduled(fixedDelay = 5000)
+    //@Scheduled(fixedDelay = 5000)
     public  void redispush() {
         List<String> messages = jedis.blpop(0,"Q1");
         System.out.println("pop message from Q1 message: "+messages.get(1));
