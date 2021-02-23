@@ -1,0 +1,13 @@
+<configuration>
+    <appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
+        <log>application.log</log> <!-- Optional : default java.log -->
+    </appender>
+    <appender name="LOGSTASH_JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="CLOUD" />
+        <appender-ref ref="LOGSTASH_JSON_CONSOLE"/>
+    </root>
+</configuration>
