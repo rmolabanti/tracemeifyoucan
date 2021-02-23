@@ -34,6 +34,7 @@ public class CollectorController {
     public Entity collect(){
         Entity entity = new Entity();
         entity.setName("name");
+        System.out.println("inside collect api");
         return entity;
     }
 
