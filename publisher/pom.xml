@@ -47,6 +47,11 @@
 			<artifactId>opentelemetry-extension-auto-annotations</artifactId>
 			<version>0.10.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-logging-logback</artifactId>
+			<version>0.120.1-alpha</version>
+		</dependency>
 	</dependencies>
 
 	<build>
