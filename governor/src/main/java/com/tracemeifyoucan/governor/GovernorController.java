@@ -30,13 +30,13 @@ public class GovernorController {
 
     @RequestMapping(value = "/reserve", method = RequestMethod.GET)
     public int reserve() throws InterruptedException {
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         return 1;
 
     }
     @RequestMapping(value = "/release", method = RequestMethod.POST)
     public int release() throws InterruptedException {
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         return 1;
     }
 
