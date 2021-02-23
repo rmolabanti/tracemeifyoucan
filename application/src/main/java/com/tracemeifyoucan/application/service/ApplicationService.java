@@ -1,17 +1,20 @@
 package com.tracemeifyoucan.application.service;
 
+import com.amazonaws.xray.spring.aop.AbstractXRayInterceptor;
+import com.amazonaws.xray.spring.aop.XRayEnabled;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@XRayEnabled
 public class ApplicationService {
     public static final Logger logger = LoggerFactory.getLogger(ApplicationService.class);
     ObjectMapper mapper = new ObjectMapper();
-
 
     public void simpleRequestProcessor() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
@@ -21,4 +24,5 @@ public class ApplicationService {
        // Entity rEntity = restTemplate.postForObject("http://localhost:8082/publish",entity,Entity.class);
        // logger.info("Response {}",mapper.writeValueAsString(rEntity));
     }
+
 }

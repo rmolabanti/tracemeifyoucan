@@ -1,5 +1,7 @@
 package com.tracemeifyoucan.collector;
 
+import com.amazonaws.xray.spring.aop.AbstractXRayInterceptor;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @EnableScheduling
-public class CollectorController {
+public class CollectorController extends AbstractXRayInterceptor {
 
     @Autowired
     CollectorService service;
@@ -64,4 +66,7 @@ public class CollectorController {
         System.out.println("pop form Q2 message: "+messages.get(1));
     }
 
+    @Override
+    @Pointcut("@within(com.amazonaws.xray.spring.aop.XRayEnabled) && bean(*Controller)")
+    public void xrayEnabledClasses() {}
 }

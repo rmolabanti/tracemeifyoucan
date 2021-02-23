@@ -1,9 +1,11 @@
 package com.tracemeifyoucan.collector;
 
+import com.amazonaws.xray.spring.aop.XRayEnabled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@XRayEnabled
 public class CollectorService {
 
     public String callGoApi(int time){
