@@ -31,7 +31,7 @@ public class PublishController {
 
     @PostMapping("/publish/{time}")
     public Entity publish(@RequestBody Entity entity,@PathVariable int time) throws JsonProcessingException {
-            return TracerUtil.withSpan("publish",() ->{
+            return TracerUtil.withSpan("manual span in publish",() ->{
                 logger.info(new ObjectMapper().writeValueAsString(entity));
                 try {
                     logger.warn("Waiting "+time);
