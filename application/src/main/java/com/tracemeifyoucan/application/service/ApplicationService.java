@@ -13,11 +13,11 @@ public class ApplicationService {
     ObjectMapper mapper = new ObjectMapper();
 
 
-    public void simpleRequestProcessor() throws JsonProcessingException {
+    public void simpleRequestProcessor(int time) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         Entity entity = restTemplate.getForObject("http://localhost:8081/collect",Entity.class);
         entity.setId(123);
-        Entity rEntity = restTemplate.postForObject("http://localhost:8082/publish",entity,Entity.class);
+        Entity rEntity = restTemplate.postForObject("http://localhost:8082/publish/"+time,entity,Entity.class);
         logger.info("Response {}",mapper.writeValueAsString(rEntity));
     }
 }

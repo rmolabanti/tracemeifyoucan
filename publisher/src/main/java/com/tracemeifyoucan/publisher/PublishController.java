@@ -13,6 +13,7 @@ import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,13 +29,13 @@ public class PublishController {
     @Autowired
     private PublisherService service;
 
-    @PostMapping("/publish")
-    public Entity publish(@RequestBody Entity entity) throws JsonProcessingException {
+    @PostMapping("/publish/{time}")
+    public Entity publish(@RequestBody Entity entity,@PathVariable int time) throws JsonProcessingException {
             return TracerUtil.withSpan("publish",() ->{
                 logger.info(new ObjectMapper().writeValueAsString(entity));
                 try {
-                    logger.warn("Waiting 1000");
-                    Thread.sleep(1000);
+                    logger.warn("Waiting "+time);
+                    Thread.sleep(time);
                     RestTemplate restTemplate = new RestTemplate();
                     Integer count = restTemplate.getForObject("http://localhost:8083/reserve",Integer.class);
                     logger.info("Reserved 1");
